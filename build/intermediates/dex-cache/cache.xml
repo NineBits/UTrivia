@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.4.0_072f74ac20bfeeb55e0989cd7b50bfa0b2ed3f6a.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.4.0_4513cb2618704736abafea1413dd761fa95a1d2d.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_c5a0316785eaf87194f3fb7ec9d77a6f8e7cbbc4.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_5335f3602744b76ec073e53d5ec45ef2061a60e0.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2ca50edfeae1268bf87ba42e7f278cdd9225eadc">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\instant-run_687311d54cfceb6b77b9dc1845414afd2ac318ac.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_52355249965847c4958b85bc82b66c0430749a25.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_5e4ba40fd1beb5efeac5674d9221728abad085cd.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2944c5620b277062443c4d6c6662fb3c8fcbe01e">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_2192bb3281cc3896dd2fd728684116498bc75fa5.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_d98526ef97469149922af093e4be8d4dc0acbe37.jar" />
+    </item>
+    <item
+        jar="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="C:\Users\kellypc\Desktop\CS371M\UTrivia\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_e9677a5b5d15be15e4ae2563b7bff563f47114c7.jar" />
+    </item>
+
+</items>
