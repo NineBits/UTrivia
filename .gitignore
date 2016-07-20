@@ -8,6 +8,7 @@
 *.war
 *.ear
 
+local.properties
 .gradle/
 build/
 .idea/
