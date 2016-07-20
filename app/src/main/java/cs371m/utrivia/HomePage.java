@@ -46,4 +46,9 @@ public class HomePage extends AppCompatActivity {
         Intent intent = new Intent(this, TopHighscores.class);
         startActivity(intent);
     }
+
+    public void startGame(View view) {
+        Intent intent = new Intent(this, Questionnaire.class);
+        startActivity(intent);
+    }
 }
