@@ -12,6 +12,7 @@ public class MultiQuestion {
     private String cB;
     private String cC;
     private String cD;
+    ArrayList<String> choice_list;
 
 
 
@@ -23,6 +24,12 @@ public class MultiQuestion {
         this.cC = cC;
         this.cD = cD;
         //Collections.shuffle(answer_choices);
+    }
+    public MultiQuestion(String question_text, String answer, ArrayList<String> choice_list) {
+        this.question_text = question_text;
+        correct_answer = answer;
+        this.choice_list = choice_list;
+        Collections.shuffle(choice_list);
     }
 
     public MultiQuestion() {
