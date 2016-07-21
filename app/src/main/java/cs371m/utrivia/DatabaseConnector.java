@@ -11,20 +11,23 @@ import java.util.ArrayList;
 public class DatabaseConnector extends SQLiteOpenHelper {
 
 
-    private static final String DATABASE_NAME = "test1";
+    private static final String DATABASE_NAME = "test_db";
 
     private static final String TABLE_NAME = "quest";
 
     private static final String ID = "id";
-    private static final String QTEXT = "question";
-    private static final String ANSWER = "answer";
-    private static final String CHOICE_A = "A";
-    private static final String CHOICE_B = "B";
-    private static final String CHOICE_C = "C";
-    private static final String CHOICE_D = "D";
+    private static String QTEXT = "question";
+    private static String ANSWER = "answer";
+    private static String CHOICE_A = "A";
+    private static String CHOICE_B = "B";
+    private static String CHOICE_C = "C";
+    private static String CHOICE_D = "D";
+    private static ArrayList<String> choice_list = new ArrayList<String>();
+    private Context context;
     private SQLiteDatabase database;
     public DatabaseConnector(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        this.context = context;
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -37,25 +40,53 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         db.execSQL(sql);
         addQuestionsToDB();
     }
+
     private void addQuestionsToDB()
     {
-        MultiQuestion q1=new MultiQuestion("Who created the famous Hook 'em Horns sign?", "Harley Clark", "Bill Moyers", "Roger Clemens","Hans Mark", "Harley Clark");
+        choice_list = new ArrayList<>();
+        choice_list.add("Bill Moyers");
+        choice_list.add("Roger Clemens");
+        choice_list.add("Hans Mark");
+        choice_list.add("Harley Clark");
+        MultiQuestion q1=new MultiQuestion("Who created the famous Hook 'em Horns sign?", "Harley Clark", choice_list);
         this.addQuestion(q1);
-        MultiQuestion q2=new MultiQuestion("First mascot for UT was a dog named?", "Reveille", "Pig", "Bevo", "Buffy","Pig");
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Buffy");
+        choice_list.add("Reveille");
+        choice_list.add("Bevo");
+        choice_list.add("Pig");
+        MultiQuestion q2=new MultiQuestion("First mascot for UT was a dog named?", "Pig", choice_list);
         this.addQuestion(q2);
-        MultiQuestion q3=new MultiQuestion("In the 2006 Rose Bowl between UT and USC what was the final score?", "26-12","15-17", "41-38","32-39", "41-38");
+
+        choice_list = new ArrayList<>();
+        choice_list.add("26-12");
+        choice_list.add("15-17");
+        choice_list.add("41-38");
+        choice_list.add("32-39");
+        MultiQuestion q3=new MultiQuestion("In the 2006 Rose Bowl between UT and USC what was the final score?", "41-38", choice_list);
         this.addQuestion(q3);
-        MultiQuestion q4=new MultiQuestion("The University of Texas at Austin was founded in what year?", "1916", "1866", "1887","1883", "1883");
+
+        choice_list = new ArrayList<>();
+        choice_list.add("1916");
+        choice_list.add("1866");
+        choice_list.add("1887");
+        choice_list.add("1883");
+        MultiQuestion q4=new MultiQuestion("The University of Texas at Austin was founded in what year?","1883",choice_list);
         this.addQuestion(q4);
-        MultiQuestion q5=new MultiQuestion("In 1997, Texas Memorial Stadium was renamed  to the?","Memorial Stadium","Darrell K. Royal Texas Memorial Stadium","The Rosebowl","Kyle Field","Darrell K. Royal Texas Memorial Stadium");
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Memorial Stadium");
+        choice_list.add("Darrell K. Royal Texas Memorial Stadium");
+        choice_list.add("The Rosebowl");
+        choice_list.add("Kyle Field");
+        MultiQuestion q5=new MultiQuestion("In 1997, Texas Memorial Stadium was renamed  to the?","Darrell K. Royal Texas Memorial Stadium", choice_list);
         this.addQuestion(q5);
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
-        // Drop older table if existed
-        db.execSQL("DROP TABLE " + TABLE_NAME);
-        // Create tables again
-        onCreate(db);
+
     }
     public void addQuestion(MultiQuestion quest) {
 
@@ -69,27 +100,26 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         database.insert(TABLE_NAME, null, values);
     }
     public ArrayList<MultiQuestion> getAllQuestions() {
-        ArrayList<MultiQuestion> quesList = new ArrayList<MultiQuestion>();
-    
+        ArrayList<MultiQuestion> question_list = new ArrayList<MultiQuestion>();
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
         database =this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
       
         if (cursor.moveToFirst()) {
             do {
-                MultiQuestion quest = new MultiQuestion();
-                quest.setId(cursor.getInt(0));
-                quest.setQuestion_text(cursor.getString(1));
-                quest.setCorrect_answer(cursor.getString(2));
-                quest.setcA(cursor.getString(3));
-                quest.setcB(cursor.getString(4));
-                quest.setcC(cursor.getString(5));
-                quest.setcD(cursor.getString(6));
-                quesList.add(quest);
+                MultiQuestion question = new MultiQuestion();
+                question.setId(cursor.getInt(0));
+                question.setQuestion_text(cursor.getString(1));
+                question.setCorrect_answer(cursor.getString(2));
+                question.setcA(cursor.getString(3));
+                question.setcB(cursor.getString(4));
+                question.setcC(cursor.getString(5));
+                question.setcD(cursor.getString(6));
+                question_list.add(question);
             } while (cursor.moveToNext());
         }
-        // return quest list
-        return quesList;
+
+        return question_list;
     }
 }
 

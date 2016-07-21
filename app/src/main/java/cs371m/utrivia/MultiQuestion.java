@@ -14,22 +14,15 @@ public class MultiQuestion {
     private String cD;
     ArrayList<String> choice_list;
 
-
-
-    public MultiQuestion(String question_text,String cA, String cB, String cC, String cD, String answer) {
-        this.question_text = question_text;
-        correct_answer = answer;
-        this.cA = cA;
-        this.cB = cB;
-        this.cC = cC;
-        this.cD = cD;
-        //Collections.shuffle(answer_choices);
-    }
     public MultiQuestion(String question_text, String answer, ArrayList<String> choice_list) {
         this.question_text = question_text;
         correct_answer = answer;
         this.choice_list = choice_list;
         Collections.shuffle(choice_list);
+        this.cA = choice_list.get(0);
+        this.cB = choice_list.get(1);
+        this.cC = choice_list.get(2);
+        this.cD = choice_list.get(3);
     }
 
     public MultiQuestion() {
@@ -48,7 +41,7 @@ public class MultiQuestion {
     public String getcB() { return cB;}
     public String getcC() { return cC;}
     public String getcD() { return cD;}
-    public int getID() {return id;}
+
 
     public void setQuestion_text(String qt) { question_text = qt;}
     public void setCorrect_answer(String answer) {correct_answer = answer;}

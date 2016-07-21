@@ -61,6 +61,7 @@ public class Questionnaire extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.questionnaire_layout);
+        this.deleteDatabase("test2.db");
         DatabaseConnector database = new DatabaseConnector(this);
         final  ArrayList<MultiQuestion> question_list =database.getAllQuestions();
         current_question = question_list.get(numQuestions);
