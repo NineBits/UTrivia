@@ -68,6 +68,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:id="@+id/button" />
+    <ImageView
+        android:id="@+id/coin_pic"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/coin"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/score_display" />
 
     <TextView
         android:id="@+id/score_display"
