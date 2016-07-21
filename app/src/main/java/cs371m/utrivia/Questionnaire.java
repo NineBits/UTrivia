@@ -82,7 +82,7 @@ public class Questionnaire extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //action for onclick
-                if(numQuestions >= 6) {
+                if(numQuestions >= 16) {
                     toHighscore(v);
                 }
 
@@ -93,7 +93,7 @@ public class Questionnaire extends AppCompatActivity {
                     score += 5;
                 }
 
-                if(numQuestions < 5) {
+                if(numQuestions < 15) {
                     current_question = question_list.get(numQuestions);
                     setQuestion();
                 } else {
