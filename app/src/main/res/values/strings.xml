@@ -6,4 +6,5 @@
     <string name="start_game">Start Game</string>
     <string name="end_game">End Game</string>
     <string name="new_score">You Scored:</string>
+    <string name="next">Next</string>
 </resources>
