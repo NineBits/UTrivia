@@ -6,11 +6,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import java.util.Map;
+
 /**
  * Created by julioMendez on 7/19/16.
  */
 /*
 public class Questionnaire extends Activity{
+    public static Map topHighscores;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import cs371m.utrivia.Questionnaire;
 
 /**
  * Created by julioMendez on 7/17/16.
@@ -19,6 +20,10 @@ public class TopHighscores extends Activity {
         setContentView(R.layout.top_highscores_layout);
 
         ListView mHighScoresList = (ListView) findViewById(R.id.highscoreList);
+
+    }
+
+    public void fillHighscoreList() {
 
     }
 
