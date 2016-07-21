@@ -107,6 +107,11 @@ public class Questionnaire extends AppCompatActivity {
         numQuestions++;
     }
 
+    public void toHighscore(View view) {
+        Intent intent = new Intent(this, Highscore.class);
+        startActivity(intent);
+    }
+
 
 
 }
