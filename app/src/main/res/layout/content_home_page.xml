@@ -10,14 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="cs371m.utrivia.HomePage"
-    tools:showIn="@layout/activity_home_page">
+    tools:showIn="@layout/activity_home_page"
+    android:background="@drawable/utcampus">
 
     <!-- Image is too big with white background-->
     <ImageView
         android:id="@+id/logo_pic"
-        android:layout_width="350dp"
-        android:layout_height="150dp"
-        android:src="@drawable/logo"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/logo"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/start_button"
@@ -25,7 +28,9 @@
         android:layout_height="wrap_content"
         android:text="@string/start_game"
         android:onClick="startGame"
-        android:layout_below="@id/logo_pic"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp" />
 
 
     <Button
@@ -34,5 +39,7 @@
         android:layout_height="wrap_content"
         android:text= "@string/top_scores"
         android:onClick="toHighscores"
-        android:layout_below="@id/start_button"/>
+        android:textSize="20dp"
+        android:layout_below="@+id/start_button"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
