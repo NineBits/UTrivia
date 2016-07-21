@@ -2,6 +2,7 @@ package cs371m.utrivia;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,8 @@ public class Questionnaire extends AppCompatActivity {
     int numQuestions = 0;
     int score = 0;
 
+    public static final String TOTALSCORE = "TotalScore";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +82,9 @@ public class Questionnaire extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //action for onclick
+                if(numQuestions >= 6) {
+                    toHighscore(v);
+                }
 
                 RadioGroup rGroup = (RadioGroup) findViewById(R.id.rGroup);
                 RadioButton answer = (RadioButton) Questionnaire.this.findViewById(rGroup.getCheckedRadioButtonId());
@@ -91,7 +97,7 @@ public class Questionnaire extends AppCompatActivity {
                     current_question = question_list.get(numQuestions);
                     setQuestion();
                 } else {
-                    //Start Bonus Question Activity
+                    // To bonus question
                 }
 
             }
@@ -110,6 +116,13 @@ public class Questionnaire extends AppCompatActivity {
 
     public void toHighscore(View view) {
         Intent intent = new Intent(this, Highscore.class);
+
+
+        SharedPreferences.Editor sharedScore = getSharedPreferences(TOTALSCORE, MODE_PRIVATE).edit();
+        sharedScore.putInt("score", score);
+        sharedScore.apply();
+
+        startActivity(intent);
         startActivity(intent);
     }
 
