@@ -93,7 +93,11 @@ public class Questionnaire extends AppCompatActivity {
                     score += 5;
                 }
 
+<<<<<<< Updated upstream
                 if(numQuestions < 15) {
+=======
+                if(numQuestions < 16) {
+>>>>>>> Stashed changes
                     current_question = question_list.get(numQuestions);
                     setQuestion();
                 } else {

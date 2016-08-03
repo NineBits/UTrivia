@@ -82,12 +82,94 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         choice_list.add("Kyle Field");
         MultiQuestion q5=new MultiQuestion("In 1997, Texas Memorial Stadium was renamed  to the?","Darrell K. Royal Texas Memorial Stadium", choice_list);
         this.addQuestion(q5);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Walter S. Hunnicutt");
+        choice_list.add("Richard Simmons");
+        choice_list.add("Col. George Hurt");
+        choice_list.add("Vince Young");
+        MultiQuestion q6=new MultiQuestion("The song Texas Figt is writting by?", "Walter S. Hunnicutt", choice_list);
+        this.addQuestion(q6);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("127");
+        choice_list.add("130");
+        choice_list.add("95");
+        choice_list.add("107");
+        MultiQuestion q7=new MultiQuestion("How many Olympic medals has UT alumni & students won?", "130", choice_list);
+        this.addQuestion(q7);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("37");
+        choice_list.add("40");
+        choice_list.add("45");
+        choice_list.add("35");
+        MultiQuestion q8=new MultiQuestion("a nominee for the Outstading Young Texas Ex award be must be younger ", "40", choice_list);
+        this.addQuestion(q8);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Red River Rivalry");
+        choice_list.add("Texas vs A&M");
+        choice_list.add("Cotton Bowl");
+        choice_list.add("BIG 12 championship game");
+        MultiQuestion q9=new MultiQuestion("Smokey the cannon was created in response to shotgun blasts often heard from where? ", "Red River Rivalry", choice_list);
+        this.addQuestion(q9);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Red River Rivalry");
+        choice_list.add("Texas vs A&M");
+        choice_list.add("Cotton Bowl");
+        choice_list.add("BIG 12 championship game");
+        MultiQuestion q10=new MultiQuestion("Smokey the cannon was created in response to shotgun blasts often heard from where? ", "Red River Rivalry", choice_list);
+        this.addQuestion(q10);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Accounting");
+        choice_list.add("Computer Science");
+        choice_list.add("Mechanical Engineering");
+        choice_list.add("Finance");
+        MultiQuestion q11=new MultiQuestion("UT is #1 in the US for what major?", "Accounting", choice_list);
+        this.addQuestion(q11);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("1972");
+        choice_list.add("2007");
+        choice_list.add("2002");
+        choice_list.add("1998");
+        MultiQuestion q12=new MultiQuestion("Ernest Allen Emerson won the Turing award in what year?", "2007", choice_list);
+        this.addQuestion(q12);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("Sweetheart of the Longhorn Band");
+        choice_list.add("Big Bass Drum");
+        choice_list.add("The Heart of Texas");
+        choice_list.add("Bertha Howitzer");
+        MultiQuestion q13=new MultiQuestion(" ", "Sweetheart of the Longhorn Band", choice_list);
+        this.addQuestion(q13);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("You'll ace you're next exam");
+        choice_list.add("You'll ave nightmares for a week");
+        choice_list.add("Nothing. What is the Albino Squirrel");
+        choice_list.add("You need to report it to animal Services");
+        MultiQuestion q14=new MultiQuestion("What happens when you spot the famous Albino Squirrel", "You'll ace you're next exam", choice_list);
+        this.addQuestion(q14);
+
+        choice_list = new ArrayList<>();
+        choice_list.add("WWI");
+        choice_list.add("WWII");
+        choice_list.add("the Vietnam War");
+        choice_list.add("the UT Tower shooting");
+        MultiQuestion q15=new MultiQuestion("The Littlefield fountain was built to commemorate UT students and alumni who died during ____ ?", "WWI", choice_list);
+        this.addQuestion(q15);
+
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
-
     }
+
     public void addQuestion(MultiQuestion quest) {
 
         ContentValues values = new ContentValues();
