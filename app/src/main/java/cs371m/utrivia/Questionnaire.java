@@ -108,16 +108,16 @@ public class Questionnaire extends AppCompatActivity {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //action for onclick
-                if(numQuestions >= 15) {
-                    toHighscore(v);
-                }
-
                 RadioGroup rGroup = (RadioGroup) findViewById(R.id.rGroup);
                 RadioButton answer = (RadioButton) Questionnaire.this.findViewById(rGroup.getCheckedRadioButtonId());
                 Log.d("yourans", current_question.getCorrect_answer()+" "+answer.getText());
                 if(answer.getText().toString().equals(current_question.getCorrect_answer())) {
                     score += 5;
+                }
+
+                //action for onclick
+                if(numQuestions >= 15) {
+                    toHighscore(v);
                 }
 
                 if(numQuestions < 15) {
