@@ -232,4 +232,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return question_list;
     }
 
+    public ArrayList<HighscoreList> getAllHighscores() {
+        ArrayList<HighscoreList> highscore_list = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + "HIGHSCORES";
+        //database =this.getReadableDatabase();
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                HighscoreList highscore = new HighscoreList();
+                highscore.setRank(cursor.getInt(0));
+                highscore.setName(cursor.getString(1));
+                highscore.setScore(cursor.getInt(2));
+                highscore_list.add(highscore);
+            } while (cursor.moveToNext());
+        }
+
+
+        return highscore_list;
+    }
+
 }

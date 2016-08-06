@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import cs371m.utrivia.Questionnaire;
 
@@ -32,26 +35,59 @@ public class TopHighscores extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.top_highscores_layout);
 
-        fillHighscoreWithStatic();
+        // fillHighscoreWithStatic();
+
+        DatabaseHelper myDbHelper = new DatabaseHelper(this);
+
+        try {
+            myDbHelper.createDataBase();
+        } catch (IOException ioe) {
+            throw new Error("Unable to create database");
+        }
+        try {
+            myDbHelper.openDataBase();
+
+        }catch(SQLException sqle){
+            throw sqle;
+        }
+
+
+        final ArrayList<HighscoreList> highscore_list = myDbHelper.getAllHighscores();
+
+        TextView scoreList = (TextView) findViewById(R.id.highscoreList);
+        TextView highscore_numbers = (TextView) findViewById(R.id.highscoreNumbers);
+        String highscores = "";
+        String highscoreNumbers = "";
+
+
+
+        for(int i = 0; i < 5; i++) {
+            highscores += highscore_list.get(i).getName() + "\n";
+            highscoreNumbers += highscore_list.get(i).getScore() + "\n";
+        }
+
+        scoreList.setText(highscores);
+        highscore_numbers.setText(highscoreNumbers);
+
 
 //        new CreateHighscoresTask().execute((Object[]) null);
 //        new GetHighscoresTask().execute((Object[]) null);
     }
 
-    private void fillHighscoreWithStatic() {
-        TextView scoreList = (TextView) findViewById(R.id.highscoreList);
-        TextView highscore_numbers = (TextView) findViewById(R.id.highscoreNumbers);
-        String highscores = "Larry\n" +
-                            "Carol\n" +
-                            "John\n" +
-                            "Kevin\n" +
-                            "Billy\n";
-
-        String highscoreNumbers = "60\n55\n50\n45\n40";
-
-        scoreList.setText(highscores);
-        highscore_numbers.setText(highscoreNumbers);
-    }
+//    private void fillHighscoreWithStatic() {
+//        TextView scoreList = (TextView) findViewById(R.id.highscoreList);
+//        TextView highscore_numbers = (TextView) findViewById(R.id.highscoreNumbers);
+//        String highscores = "Larry\n" +
+//                            "Carol\n" +
+//                            "John\n" +
+//                            "Kevin\n" +
+//                            "Billy\n";
+//
+//        String highscoreNumbers = "60\n55\n50\n45\n40";
+//
+//        scoreList.setText(highscores);
+//        highscore_numbers.setText(highscoreNumbers);
+//    }
 
     public void toHome(View view) {
         Intent intent = new Intent(this, HomePage.class);
