@@ -60,6 +60,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <Button
+        android:id="@+id/lifeline_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lifeline"
+        android:onClick="onClickLifeline"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/end_game"

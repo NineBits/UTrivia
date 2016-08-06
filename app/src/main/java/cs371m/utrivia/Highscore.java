@@ -23,6 +23,7 @@ public class Highscore extends Activity {
 
         TextView score = (TextView) findViewById(R.id.userscore);
         score.setText(Integer.toString(restoredscore));
+
     }
 
     public void toHome(View view) {

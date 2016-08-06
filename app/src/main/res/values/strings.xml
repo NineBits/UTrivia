@@ -7,6 +7,7 @@
     <string name="end_game">End Game</string>
     <string name="new_score">You Scored:</string>
     <string name="next">Next</string>
+    <string name="lifeline">Lifeline</string>
     <string name="logo">logo</string>
 </resources>
 

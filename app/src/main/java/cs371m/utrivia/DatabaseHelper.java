@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         boolean dbExist = checkDataBase();
 
-        if(dbExist){
+        if(!dbExist){ //Originally dbExist but changed to !dbExist to allow for changes to db temporary
             //do nothing - database already exist
         }else{
 

@@ -1,6 +1,7 @@
 package cs371m.utrivia;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
@@ -134,6 +135,15 @@ public class Questionnaire extends AppCompatActivity {
     {
         score_display.setText("SCORE: " + score);
         qText.setText(current_question.getQuestion_text());
+        /*
+        if(onClickLifeline()) {
+            ArrayList<String> wrong_answers = new ArrayList<String>();
+            for(int i = 0; i < 4; i++) {
+                wrong_answers = current_question.getChoice_list();
+            }
+        }
+        */
+
         option_A.setText(current_question.getcA());
         option_B.setText(current_question.getcB());
         option_C.setText(current_question.getcC());
@@ -148,10 +158,18 @@ public class Questionnaire extends AppCompatActivity {
         SharedPreferences.Editor sharedScore = getSharedPreferences(TOTALSCORE, MODE_PRIVATE).edit();
         sharedScore.putInt("score", score);
         sharedScore.apply();
+        //setting preferences
 
         startActivity(intent);
         startActivity(intent);
     }
+
+    /*
+    public boolean onClickLifeline(View view) {
+
+        return true;
+    }
+    */
 
 
 

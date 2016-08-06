@@ -12,7 +12,7 @@ public class MultiQuestion {
     private String cB;
     private String cC;
     private String cD;
-    ArrayList<String> choice_list;
+    private ArrayList<String> choice_list;
 
     public MultiQuestion(String question_text, String answer, ArrayList<String> choice_list) {
         this.question_text = question_text;
@@ -41,6 +41,7 @@ public class MultiQuestion {
     public String getcB() { return cB;}
     public String getcC() { return cC;}
     public String getcD() { return cD;}
+    public ArrayList<String> getChoice_list() {return choice_list;}
 
 
     public void setQuestion_text(String qt) { question_text = qt;}
