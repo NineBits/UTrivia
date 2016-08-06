@@ -109,7 +109,7 @@ public class Questionnaire extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //action for onclick
-                if(numQuestions >= 16) {
+                if(numQuestions >= 15) {
                     toHighscore(v);
                 }
 
