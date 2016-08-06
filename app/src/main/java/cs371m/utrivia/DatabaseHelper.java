@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //The Android's default system path of your application database.
     private static String DB_PATH = "/data/data/cs371m.utrivia/databases/";
 
-    private static String DB_NAME = "questions.db";
+    private static String DB_NAME = "gameData.db";
 
     private SQLiteDatabase myDataBase;
 
@@ -230,6 +230,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         return question_list;
+    }
+
+    public ArrayList<HighscoreList> getAllHighscores() {
+        ArrayList<HighscoreList> highscore_list = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + "HIGHSCORES";
+        //database =this.getReadableDatabase();
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                HighscoreList highscore = new HighscoreList();
+                highscore.setRank(cursor.getInt(0));
+                highscore.setName(cursor.getString(1));
+                highscore.setScore(cursor.getInt(2));
+                highscore_list.add(highscore);
+            } while (cursor.moveToNext());
+        }
+
+
+        return highscore_list;
     }
 
 }
