@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@drawable/bckrndorange">
+
 
     <TextView
         android:id="@+id/highscores"
@@ -12,18 +14,40 @@
         android:text="@string/top_scores"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    <TextView
         android:id="@+id/highscoreList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textColor="@color/colorBlack"
+        android:textIsSelectable="true"
+        android:layout_below="@id/highscores"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/highscoreNumbers"
+        android:layout_toStartOf="@+id/highscoreNumbers" />
+
+    <TextView
+        android:id="@+id/highscoreNumbers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@+id/highscores"
+        android:layout_toRightOf="@+id/button"
+        android:layout_toEndOf="@+id/button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back"
         android:onClick="toHome"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button" />
 
-</LinearLayout>
+</RelativeLayout>
