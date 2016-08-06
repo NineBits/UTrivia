@@ -3,15 +3,19 @@ package cs371m.utrivia;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class DatabaseConnector extends SQLiteOpenHelper {
 
 
-    private static final String DATABASE_NAME = "test_db";
+    private static final String DATABASE_NAME = "test_db.db";
 
     private static final String TABLE_NAME = "quest";
 
@@ -88,7 +92,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         choice_list.add("Richard Simmons");
         choice_list.add("Col. George Hurt");
         choice_list.add("Vince Young");
-        MultiQuestion q6=new MultiQuestion("The song Texas Figt is writting by?", "Walter S. Hunnicutt", choice_list);
+        MultiQuestion q6=new MultiQuestion("The song Texas Fight is written by?", "Walter S. Hunnicutt", choice_list);
         this.addQuestion(q6);
 
         choice_list = new ArrayList<>();
@@ -104,7 +108,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         choice_list.add("40");
         choice_list.add("45");
         choice_list.add("35");
-        MultiQuestion q8=new MultiQuestion("a nominee for the Outstading Young Texas Ex award be must be younger ", "40", choice_list);
+        MultiQuestion q8=new MultiQuestion("A nominee for the Outstading Young Texas Ex award be must be younger ", "40", choice_list);
         this.addQuestion(q8);
 
         choice_list = new ArrayList<>();
@@ -112,7 +116,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         choice_list.add("Texas vs A&M");
         choice_list.add("Cotton Bowl");
         choice_list.add("BIG 12 championship game");
-        MultiQuestion q9=new MultiQuestion("Smokey the cannon was created in response to shotgun blasts often heard from where? ", "Red River Rivalry", choice_list);
+        MultiQuestion q9=new MultiQuestion("Smokey the cannon was created in response to shotgun blasts often heard from where?", "Red River Rivalry", choice_list);
         this.addQuestion(q9);
 
         choice_list = new ArrayList<>();
@@ -204,4 +208,5 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         return question_list;
     }
 }
+
 
