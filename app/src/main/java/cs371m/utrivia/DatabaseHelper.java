@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //The Android's default system path of your application database.
     private static String DB_PATH = "/data/data/cs371m.utrivia/databases/";
 
-    private static String DB_NAME = "questions.db";
+    private static String DB_NAME = "gameData.db";
 
     private SQLiteDatabase myDataBase;
 
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         boolean dbExist = checkDataBase();
 
-        if(!dbExist){ //Originally dbExist but changed to !dbExist to allow for changes to db temporary
+        if(dbExist){ //Originally dbExist but changed to !dbExist to allow for changes to db temporary
             //do nothing - database already exist
         }else{
 
