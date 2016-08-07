@@ -89,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try{
             String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 
         }catch(SQLiteException e){
 
@@ -140,7 +140,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Open the database
         String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
 
     }
 
@@ -219,6 +219,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         return highscore_list;
+    }
+
+    public void updateHS(HighscoreList updatedHighscore, int newRank) {
+        String rank = "" + updatedHighscore.getRank();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Rank", newRank);
+        myDataBase.update("HIGHSCORES", contentValues,"Rank=?",new String[] {rank});
+
+        Log.d("Updating: ", "Name: " + updatedHighscore.getName() + " oldRank: " + rank + "newRank: " + updatedHighscore.getRank());
+
+    }
+
+    public void deleteHS(int rank) {
+        Log.d("Deleting ", "Rank: " + rank);
+        myDataBase.delete("HIGHSCORES", "Rank=?", new String[]{("" + rank)});
+    }
+
+    public void addHS(HighscoreList highscore) {
+        ContentValues values = new ContentValues();
+        values.put("Rank", highscore.getRank());
+        values.put("Name", highscore.getName());
+        values.put("Score", highscore.getScore());
+
+        Log.d("Adding ", "Rank: " + highscore.getRank() + " Name: " + highscore.getName() + " " + highscore.getScore());
+        myDataBase.insert("HIGHSCORES", null, values);
     }
 
 }

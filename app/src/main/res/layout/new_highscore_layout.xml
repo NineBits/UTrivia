@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bckrndorange">
+
+    <ImageView
+        android:id="@+id/logo_pic"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"/>
+
+    <TextView
+        android:id="@+id/highscores"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="@string/new_score"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/logo_pic"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/userscore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_below="@id/highscores"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:id="@+id/newHighScore"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/userscore"
+        android:src="@drawable/new_highscore"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="@string/enterinput"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:id="@+id/enterName"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/newHighScore"
+        android:layout_alignRight="@+id/userName"
+        android:layout_alignEnd="@+id/userName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName|textCapWords"
+        android:hint="@string/name"
+        android:ems="10"
+        android:id="@+id/userName"
+        android:layout_below="@+id/enterName"
+        android:layout_alignRight="@+id/highscores"
+        android:layout_alignEnd="@+id/highscores"
+        android:imeOptions="actionDone"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_scores"
+        android:onClick="toHome"
+        android:id="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
