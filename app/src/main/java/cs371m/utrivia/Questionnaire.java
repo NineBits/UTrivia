@@ -1,6 +1,8 @@
 package cs371m.utrivia;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -129,18 +131,6 @@ public class Questionnaire extends AppCompatActivity {
                     option_C.setVisibility(View.VISIBLE);
                     option_D.setVisibility(View.VISIBLE);
                     boolean useLifeline = false;
-                    /*
-                    lifeline_button.setOnClickListener(new View.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View v)
-                        {
-
-                          boolean useLifeline = true;
-                          Log.d("Lifeline: ", " " + useLifeline);
-                        }
-                    });
-                    */
                     current_question = question_list.get(numQuestions);
                     setQuestion();
                     // To bonus question
@@ -177,6 +167,14 @@ public class Questionnaire extends AppCompatActivity {
 
 
     public void onClickLifeline(View view) {
+        if (score >= 3) {
+            DialogFragment newFragment = LifelineDialogFragment.newInstance();
+            newFragment.show(getFragmentManager(), "Use lifeline?");
+        }
+
+    }
+
+    public void setLifeline() {
         ArrayList<String> current_choices = new ArrayList<String>();
         ArrayList<String> wrong_choices = current_question.getChoice_list();
         wrong_choices.remove(current_question.getCorrect_answer());
@@ -191,6 +189,8 @@ public class Questionnaire extends AppCompatActivity {
         option_D.setVisibility(View.INVISIBLE);
 
         //Need to add score logic to lifeline
+        score = score - 3;
         lifeline_button.setEnabled(false);
     }
+
 }

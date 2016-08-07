@@ -17,7 +17,7 @@ public class LifelineDialogFragment extends DialogFragment {
                 .setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                getActivity().finish();
+                                ((Questionnaire)getActivity()).setLifeline();
                                 dismiss();
                             }
                         })
