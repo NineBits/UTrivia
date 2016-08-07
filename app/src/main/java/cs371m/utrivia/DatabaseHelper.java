@@ -170,44 +170,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public List<MultiQuestion> getAllBooks() {
-        List<MultiQuestion> books = new LinkedList<MultiQuestion>();
-
-        // 1. build the query
-        String query = "SELECT  * FROM " + "MULTI_QUESTION";
-
-        // 2. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        // 3. go over each row, build book and add it to list
-       // Book book = null;
-        if (cursor.moveToFirst()) {
-            do {
-                /*
-                book = new Book();
-                book.setId(Integer.parseInt(cursor.getString(0)));
-                book.setTitle(cursor.getString(1));
-                book.setAuthor(cursor.getString(2));
-                */
-                // Add book to books
-               // books.add(book);
-                //System.out.println(cursor.getString(1));
-                Log.d("CURSOR 1 PRINT : ", cursor.getString(1));
-            } while (cursor.moveToNext());
-        }
-
-        //Log.d("getAllBooks()", books.toString());
-
-        // return books
-        return books;
-    }
-
-    public void read () {
-        List t;
-        t = getAllBooks();
-    }
-
     public ArrayList<MultiQuestion> getAllQuestions() {
         ArrayList<MultiQuestion> question_list = new ArrayList<MultiQuestion>();
         String selectQuery = "SELECT  * FROM " + "MULTI_QUESTION";
@@ -216,14 +178,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                MultiQuestion question = new MultiQuestion();
+                ArrayList<String> choice_list = new ArrayList<String>();
+                choice_list.add(cursor.getString(3));
+                choice_list.add(cursor.getString(4));
+                choice_list.add(cursor.getString(5));
+                choice_list.add(cursor.getString(6));
+
+                MultiQuestion question = new MultiQuestion(cursor.getString(1),cursor.getString(2),choice_list);
+
                 question.setId(cursor.getInt(0));
-                question.setQuestion_text(cursor.getString(1));
-                question.setCorrect_answer(cursor.getString(2));
-                question.setcA(cursor.getString(3));
-                question.setcB(cursor.getString(4));
-                question.setcC(cursor.getString(5));
-                question.setcD(cursor.getString(6));
+                //question.setQuestion_text(cursor.getString(1));
+                //question.setCorrect_answer(cursor.getString(2));
+                //question.setcA(cursor.getString(3));
+                //question.setcB(cursor.getString(4));
+                //question.setcC(cursor.getString(5));
+                //question.setcD(cursor.getString(6));
                 question_list.add(question);
             } while (cursor.moveToNext());
         }

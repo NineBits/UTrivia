@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -57,6 +58,7 @@ public class Questionnaire extends AppCompatActivity {
     RadioButton option_A, option_B, option_C,option_D;
     RadioGroup rGroup;
     Button next_button;
+    Button lifeline_button;
     MultiQuestion current_question;
     int numQuestions = 0;
     int score = 0;
@@ -93,7 +95,7 @@ public class Questionnaire extends AppCompatActivity {
        // myDbHelper.read();
         setContentView(R.layout.questionnaire_layout);
 
-        DatabaseConnector database = new DatabaseConnector(this);
+       // DatabaseConnector database = new DatabaseConnector(this);
         final  ArrayList<MultiQuestion> question_list = myDbHelper.getAllQuestions(); //database.getAllQuestions();
         current_question = question_list.get(numQuestions);
         qText = (TextView) findViewById(R.id.question_text);
@@ -105,6 +107,7 @@ public class Questionnaire extends AppCompatActivity {
 
 
         next_button = (Button) findViewById(R.id.next_button);
+        lifeline_button = (Button) findViewById(R.id.lifeline_button);
         setQuestion();
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,9 +125,24 @@ public class Questionnaire extends AppCompatActivity {
                 }
 
                 if(numQuestions < 15) {
+                    lifeline_button.setEnabled(true);
+                    option_C.setVisibility(View.VISIBLE);
+                    option_D.setVisibility(View.VISIBLE);
+                    boolean useLifeline = false;
+                    /*
+                    lifeline_button.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+
+                          boolean useLifeline = true;
+                          Log.d("Lifeline: ", " " + useLifeline);
+                        }
+                    });
+                    */
                     current_question = question_list.get(numQuestions);
                     setQuestion();
-                } else {
                     // To bonus question
                 }
 
@@ -135,14 +153,6 @@ public class Questionnaire extends AppCompatActivity {
     {
         score_display.setText("SCORE: " + score);
         qText.setText(current_question.getQuestion_text());
-        /*
-        if(onClickLifeline()) {
-            ArrayList<String> wrong_answers = new ArrayList<String>();
-            for(int i = 0; i < 4; i++) {
-                wrong_answers = current_question.getChoice_list();
-            }
-        }
-        */
 
         option_A.setText(current_question.getcA());
         option_B.setText(current_question.getcB());
@@ -150,6 +160,7 @@ public class Questionnaire extends AppCompatActivity {
         option_D.setText(current_question.getcD());
         numQuestions++;
     }
+
 
     public void toHighscore(View view) {
         Intent intent = new Intent(this, Highscore.class);
@@ -164,13 +175,22 @@ public class Questionnaire extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
-    public boolean onClickLifeline(View view) {
 
-        return true;
+    public void onClickLifeline(View view) {
+        ArrayList<String> current_choices = new ArrayList<String>();
+        ArrayList<String> wrong_choices = current_question.getChoice_list();
+        wrong_choices.remove(current_question.getCorrect_answer());
+        //Log.d("yourans","SIZE : " + current_question.getChoice_list().size());
+        Collections.shuffle(wrong_choices);
+        current_choices.add(current_question.getCorrect_answer());
+        current_choices.add(wrong_choices.get(0));
+        Collections.shuffle(current_choices);
+        option_A.setText(current_choices.get(0));
+        option_B.setText(current_choices.get(1));
+        option_C.setVisibility(View.INVISIBLE);
+        option_D.setVisibility(View.INVISIBLE);
+
+        //Need to add score logic to lifeline
+        lifeline_button.setEnabled(false);
     }
-    */
-
-
-
 }
