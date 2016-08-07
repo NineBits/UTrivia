@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bckrndorange">
@@ -12,25 +12,32 @@
 
     <TextView
         android:id="@+id/highscores"
+        android:layout_below="@id/logo_pic"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:text="@string/new_score"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
+        android:layout_below="@id/highscores"
         android:id="@+id/userscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:onClick="toHome"/>
+        android:text="@string/top_scores"
+        android:onClick="toHome"
+        android:layout_alignBottom="@id/userscore"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
 
-</LinearLayout>
+</RelativeLayout>

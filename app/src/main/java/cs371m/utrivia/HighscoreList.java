@@ -9,7 +9,7 @@ public class HighscoreList {
     private String name;
     private int score;
 
-    public HighscoreList(int rank, String name, int score, ArrayList<String> choice_list) {
+    public HighscoreList(int rank, String name, int score) {
         this.rank = rank;
         this.name = name;
         this.score = score;

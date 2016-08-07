@@ -8,5 +8,8 @@
     <string name="new_score">You Scored:</string>
     <string name="next">Next</string>
     <string name="logo">logo</string>
+    <string name="enterinput">Enter Name</string>
+    <string name="name">Name</string>
+    <string name="ToHome">To Home</string>
 </resources>
 
