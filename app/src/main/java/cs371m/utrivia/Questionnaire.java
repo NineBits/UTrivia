@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,6 +58,7 @@ import java.util.List;
 
 
 public class Questionnaire extends AppCompatActivity {
+    private static final String TAG = "Questionnaire Activity";
     TextView qText, score_display;
     RadioButton option_A, option_B, option_C,option_D;
     RadioGroup rGroup;
@@ -64,6 +67,11 @@ public class Questionnaire extends AppCompatActivity {
     MultiQuestion current_question;
     int numQuestions = 0;
     int score = 0;
+    boolean lifeline_used;
+
+    // for all the sounds we play
+    private SoundPool mSounds;
+    private int nextSound;
 
     public static final String TOTALSCORE = "TotalScore";
 
@@ -118,7 +126,11 @@ public class Questionnaire extends AppCompatActivity {
                 RadioButton answer = (RadioButton) Questionnaire.this.findViewById(rGroup.getCheckedRadioButtonId());
                 Log.d("yourans", current_question.getCorrect_answer()+" "+answer.getText());
                 if(answer.getText().toString().equals(current_question.getCorrect_answer())) {
-                    score += 5;
+                    if(lifeline_used) {
+                        score += 2;
+                    } else {
+                        score += 5;
+                    }
                 }
 
                 //action for onclick
@@ -135,6 +147,7 @@ public class Questionnaire extends AppCompatActivity {
                     setQuestion();
                     // To bonus question
                 }
+                nextQuestionActions("",nextSound);
 
             }
         });
@@ -142,6 +155,7 @@ public class Questionnaire extends AppCompatActivity {
     public void setQuestion()
     {
         score_display.setText("SCORE: " + score);
+        lifeline_used = false;
         qText.setText(current_question.getQuestion_text());
 
         option_A.setText(current_question.getcA());
@@ -160,17 +174,16 @@ public class Questionnaire extends AppCompatActivity {
         sharedScore.putInt("score", score);
         sharedScore.apply();
         //setting preferences
-
+        mSounds.play(nextSound, 1, 1, 1, 0, 1);
         startActivity(intent);
         startActivity(intent);
     }
 
 
     public void onClickLifeline(View view) {
-        if (score >= 3) {
-            DialogFragment newFragment = LifelineDialogFragment.newInstance();
-            newFragment.show(getFragmentManager(), "Use lifeline?");
-        }
+        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        DialogFragment newFragment = LifelineDialogFragment.newInstance();
+        newFragment.show(getFragmentManager(), "Use lifeline?");
 
     }
 
@@ -189,8 +202,26 @@ public class Questionnaire extends AppCompatActivity {
         option_D.setVisibility(View.INVISIBLE);
 
         //Need to add score logic to lifeline
-        score = score - 3;
+        lifeline_used = true;
         lifeline_button.setEnabled(false);
     }
 
+    private void nextQuestionActions(String message, int soundId) {
+        //mInfoTextView.setText(messageId);
+        mSounds.play(soundId, 1, 1, 1, 0, 1);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Log.d(TAG, "in onResume");
+        mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        // 2 = maximum sounds to play at the same time,
+        // AudioManager.STREAM_MUSIC is the stream type typically used for games
+        // 0 is the "the sample-rate converter quality. Currently has no effect. Use 0 for the default."
+
+        nextSound = mSounds.load(this, R.raw.button_sound, 1);
+        // Context, id of resource, priority (currently no effect)
+
+    }
 }

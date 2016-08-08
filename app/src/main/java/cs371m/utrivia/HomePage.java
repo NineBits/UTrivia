@@ -1,6 +1,8 @@
 package cs371m.utrivia;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class HomePage extends AppCompatActivity {
+
+    // for all the sounds we play
+    private SoundPool mSounds;
+    private int nextSound;
+    private int newgameSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +50,29 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void toHighscores(View view) {
+        mSounds.play(nextSound, 1, 1, 1, 0, 1);
         Intent intent = new Intent(this, TopHighscores.class);
         startActivity(intent);
     }
 
     public void startGame(View view) {
+        mSounds.play(newgameSound, 1, 1, 1, 0, 1);
         Intent intent = new Intent(this, Questionnaire.class);
         startActivity(intent);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        //Log.d(TAG, "in onResume");
+        mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        // 2 = maximum sounds to play at the same time,
+        // AudioManager.STREAM_MUSIC is the stream type typically used for games
+        // 0 is the "the sample-rate converter quality. Currently has no effect. Use 0 for the default."
+
+
+        newgameSound = mSounds.load(this, R.raw.newgame_sound, 1);
+        nextSound = mSounds.load(this, R.raw.button_sound, 1);
+        // Context, id of resource, priority (currently no effect)
+
     }
 }
