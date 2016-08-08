@@ -216,6 +216,7 @@ public class Questionnaire extends AppCompatActivity {
         super.onResume();
         //Log.d(TAG, "in onResume");
         mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+
         // 2 = maximum sounds to play at the same time,
         // AudioManager.STREAM_MUSIC is the stream type typically used for games
         // 0 is the "the sample-rate converter quality. Currently has no effect. Use 0 for the default."

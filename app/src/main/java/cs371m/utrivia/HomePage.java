@@ -1,7 +1,9 @@
 package cs371m.utrivia;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,6 +45,14 @@ public class HomePage extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //mute audio
+            //might be temp solution since this method is deprecated.
+            AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+            amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
+            amanager.setStreamMute(AudioManager.STREAM_ALARM, true);
+            amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
+            amanager.setStreamMute(AudioManager.STREAM_RING, true);
+            amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
             return true;
         }
 
