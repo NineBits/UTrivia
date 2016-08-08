@@ -6,12 +6,15 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.SQLException;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -59,7 +62,8 @@ import java.util.List;
 
 public class Questionnaire extends AppCompatActivity {
     private static final String TAG = "Questionnaire Activity";
-    TextView qText, score_display;
+    ImageView progressbar;
+    TextView qText, qNumber, score_display;
     RadioButton option_A, option_B, option_C,option_D;
     RadioGroup rGroup;
     Button next_button;
@@ -109,6 +113,7 @@ public class Questionnaire extends AppCompatActivity {
         final  ArrayList<MultiQuestion> question_list = myDbHelper.getAllQuestions(); //database.getAllQuestions();
         current_question = question_list.get(numQuestions);
         qText = (TextView) findViewById(R.id.question_text);
+        qNumber = (TextView) findViewById(R.id.question_number);
         score_display = (TextView) findViewById(R.id.score_display);
         option_A = (RadioButton) findViewById(R.id.radio_button_a);
         option_B = (RadioButton) findViewById(R.id.radio_button_b);
@@ -154,10 +159,18 @@ public class Questionnaire extends AppCompatActivity {
     }
     public void setQuestion()
     {
+        progressbar = (ImageView) findViewById(R.id.progress);
+        //Set progress bar imageView
+        Resources res = getResources();
+        String mDrawableName = "progress"+numQuestions;
+        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
+        Drawable drawable = res.getDrawable(resID );
+        progressbar.setImageDrawable(drawable);
+
         score_display.setText("SCORE: " + score);
         lifeline_used = false;
         qText.setText(current_question.getQuestion_text());
-
+        qNumber.setText((+numQuestions+1)+".");
         option_A.setText(current_question.getcA());
         option_B.setText(current_question.getcB());
         option_C.setText(current_question.getcC());

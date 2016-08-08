@@ -47,12 +47,14 @@ public class HomePage extends AppCompatActivity {
         if (id == R.id.action_settings) {
             //mute audio
             //might be temp solution since this method is deprecated.
+            /*
             AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
             amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
             amanager.setStreamMute(AudioManager.STREAM_ALARM, true);
             amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
             amanager.setStreamMute(AudioManager.STREAM_RING, true);
             amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+            */
             return true;
         }
 
@@ -60,7 +62,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void toHighscores(View view) {
-        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        mSounds.play(newgameSound, 1, 1, 1, 0, 1);
         Intent intent = new Intent(this, TopHighscores.class);
         startActivity(intent);
     }
