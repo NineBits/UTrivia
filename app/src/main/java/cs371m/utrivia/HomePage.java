@@ -51,4 +51,9 @@ public class HomePage extends AppCompatActivity {
         Intent intent = new Intent(this, Questionnaire.class);
         startActivity(intent);
     }
+
+    public void toAbout(MenuItem item) {
+        Intent intent = new Intent(this, HowTo.class);
+        startActivity(intent);
+    }
 }
