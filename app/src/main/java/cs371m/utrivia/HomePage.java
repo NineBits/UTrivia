@@ -85,6 +85,10 @@ public class HomePage extends AppCompatActivity {
         newgameSound = mSounds.load(this, R.raw.newgame_sound, 1);
         nextSound = mSounds.load(this, R.raw.button_sound, 1);
         // Context, id of resource, priority (currently no effect)
+    }
 
+    public void toAbout(MenuItem item) {
+        Intent intent = new Intent(this, HowTo.class);
+        startActivity(intent);
     }
 }
