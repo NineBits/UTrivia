@@ -12,5 +12,6 @@
     <string name="enterinput">Enter Name</string>
     <string name="name">Name</string>
     <string name="ToHome">To Home</string>
+    <string name="muteSound">0</string>
 </resources>
 
