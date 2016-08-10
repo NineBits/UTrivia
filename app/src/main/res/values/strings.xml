@@ -21,9 +21,8 @@
     <string name="cancel">cancel</string>
     <string name="mute_sound">Sound on/off</string>
 
-
-    <string name="intro">Welcome to Utriva. This game will challenge you about the various facts and knowledge of UT Austin. Attempt all questions for the highest possible score.
-    You also have the option of using a "Lifeline" in which two of the incorrect answer choices will disappear at the cost of 3 coins.</string>
-
+    
+    <string name="intro">Welcome to Utriva. This game will challenge you about the various facts and knowledge of UT Austin. Attempt all questions for the highest possible score.</string>
+    <string name="lifeline_talk">You also have the option of using a "Lifeline" in which two of the incorrect answer choices will disappear at the cost of 3 coins.</string>
 </resources>
 
