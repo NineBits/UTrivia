@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -195,6 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 //question.setcD(cursor.getString(6));
                 question_list.add(question);
             } while (cursor.moveToNext());
+            Collections.shuffle(question_list);
         }
 
 

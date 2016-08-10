@@ -13,11 +13,11 @@ public class LifelineDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Lifeline Dialog")
+        builder.setMessage("Using the lifeline will reduce the reward of the question to 2 points instead of 5. Confirm use?")
                 .setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                getActivity().finish();
+                                ((Questionnaire)getActivity()).setLifeline();
                                 dismiss();
                             }
                         })

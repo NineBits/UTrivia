@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -26,6 +28,11 @@ public class Highscore extends Activity {
     boolean newHighscoreFlag = false;
     DatabaseHelper myDbHelper;
     HighscoreList newHighscore;
+
+    // for all the sounds we play
+    private SoundPool mSounds;
+    private int nextSound;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         newHighscoreFlag = false;
@@ -38,6 +45,8 @@ public class Highscore extends Activity {
         newHighscore.setScore(restoredscore);
 
         myDbHelper = new DatabaseHelper(this);
+
+
 
         try {
             myDbHelper.createDataBase();
@@ -68,6 +77,7 @@ public class Highscore extends Activity {
             myDbHelper.addHS(newHighscore);
         }
         Intent intent = new Intent(this, TopHighscores.class);
+        mSounds.play(nextSound, 1, 1, 1, 0, 1);
         startActivity(intent);
     }
 
@@ -104,4 +114,18 @@ public class Highscore extends Activity {
             setContentView(R.layout.highscore_layout);
         }
     }
+    protected void onResume() {
+        super.onResume();
+        //Log.d(TAG, "in onResume");
+        mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        // 2 = maximum sounds to play at the same time,
+        // AudioManager.STREAM_MUSIC is the stream type typically used for games
+        // 0 is the "the sample-rate converter quality. Currently has no effect. Use 0 for the default."
+
+        nextSound = mSounds.load(this, R.raw.button_sound, 1);
+        // Context, id of resource, priority (currently no effect)
+
+
+    }
+
 }

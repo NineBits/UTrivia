@@ -1,13 +1,20 @@
 package cs371m.utrivia;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.SQLException;
+import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.io.IOException;
@@ -54,7 +61,9 @@ import java.util.List;
 
 
 public class Questionnaire extends AppCompatActivity {
-    TextView qText, score_display;
+    private static final String TAG = "Questionnaire Activity";
+    ImageView progressbar;
+    TextView qText, qNumber, score_display;
     RadioButton option_A, option_B, option_C,option_D;
     RadioGroup rGroup;
     Button next_button;
@@ -62,6 +71,11 @@ public class Questionnaire extends AppCompatActivity {
     MultiQuestion current_question;
     int numQuestions = 0;
     int score = 0;
+    boolean lifeline_used;
+
+    // for all the sounds we play
+    private SoundPool mSounds;
+    private int nextSound;
 
     public static final String TOTALSCORE = "TotalScore";
 
@@ -99,6 +113,7 @@ public class Questionnaire extends AppCompatActivity {
         final  ArrayList<MultiQuestion> question_list = myDbHelper.getAllQuestions(); //database.getAllQuestions();
         current_question = question_list.get(numQuestions);
         qText = (TextView) findViewById(R.id.question_text);
+        qNumber = (TextView) findViewById(R.id.question_number);
         score_display = (TextView) findViewById(R.id.score_display);
         option_A = (RadioButton) findViewById(R.id.radio_button_a);
         option_B = (RadioButton) findViewById(R.id.radio_button_b);
@@ -116,7 +131,11 @@ public class Questionnaire extends AppCompatActivity {
                 RadioButton answer = (RadioButton) Questionnaire.this.findViewById(rGroup.getCheckedRadioButtonId());
                 Log.d("yourans", current_question.getCorrect_answer()+" "+answer.getText());
                 if(answer.getText().toString().equals(current_question.getCorrect_answer())) {
-                    score += 5;
+                    if(lifeline_used) {
+                        score += 2;
+                    } else {
+                        score += 5;
+                    }
                 }
 
                 //action for onclick
@@ -129,31 +148,29 @@ public class Questionnaire extends AppCompatActivity {
                     option_C.setVisibility(View.VISIBLE);
                     option_D.setVisibility(View.VISIBLE);
                     boolean useLifeline = false;
-                    /*
-                    lifeline_button.setOnClickListener(new View.OnClickListener()
-                    {
-                        @Override
-                        public void onClick(View v)
-                        {
-
-                          boolean useLifeline = true;
-                          Log.d("Lifeline: ", " " + useLifeline);
-                        }
-                    });
-                    */
                     current_question = question_list.get(numQuestions);
                     setQuestion();
                     // To bonus question
                 }
+                nextQuestionActions("",nextSound);
 
             }
         });
     }
     public void setQuestion()
     {
-        score_display.setText("SCORE: " + score);
-        qText.setText(current_question.getQuestion_text());
+        progressbar = (ImageView) findViewById(R.id.progress);
+        //Set progress bar imageView
+        Resources res = getResources();
+        String mDrawableName = "progress"+numQuestions;
+        int resID = res.getIdentifier(mDrawableName , "drawable", getPackageName());
+        Drawable drawable = res.getDrawable(resID );
+        progressbar.setImageDrawable(drawable);
 
+        score_display.setText("SCORE: " + score);
+        lifeline_used = false;
+        qText.setText(current_question.getQuestion_text());
+        qNumber.setText((+numQuestions+1)+".");
         option_A.setText(current_question.getcA());
         option_B.setText(current_question.getcB());
         option_C.setText(current_question.getcC());
@@ -170,13 +187,20 @@ public class Questionnaire extends AppCompatActivity {
         sharedScore.putInt("score", score);
         sharedScore.apply();
         //setting preferences
-
+        mSounds.play(nextSound, 1, 1, 1, 0, 1);
         startActivity(intent);
         startActivity(intent);
     }
 
 
     public void onClickLifeline(View view) {
+        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        DialogFragment newFragment = LifelineDialogFragment.newInstance();
+        newFragment.show(getFragmentManager(), "Use lifeline?");
+
+    }
+
+    public void setLifeline() {
         ArrayList<String> current_choices = new ArrayList<String>();
         ArrayList<String> wrong_choices = current_question.getChoice_list();
         wrong_choices.remove(current_question.getCorrect_answer());
@@ -191,6 +215,27 @@ public class Questionnaire extends AppCompatActivity {
         option_D.setVisibility(View.INVISIBLE);
 
         //Need to add score logic to lifeline
+        lifeline_used = true;
         lifeline_button.setEnabled(false);
+    }
+
+    private void nextQuestionActions(String message, int soundId) {
+        //mInfoTextView.setText(messageId);
+        mSounds.play(soundId, 1, 1, 1, 0, 1);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Log.d(TAG, "in onResume");
+        mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+
+        // 2 = maximum sounds to play at the same time,
+        // AudioManager.STREAM_MUSIC is the stream type typically used for games
+        // 0 is the "the sample-rate converter quality. Currently has no effect. Use 0 for the default."
+
+        nextSound = mSounds.load(this, R.raw.button_sound, 1);
+        // Context, id of resource, priority (currently no effect)
+
     }
 }
