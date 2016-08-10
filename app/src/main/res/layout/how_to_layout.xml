@@ -14,11 +14,33 @@
         android:textSize="20sp"/>
 
     <TextView
-        android:id="@+id/lifeline"
+        android:id="@+id/rules"
         android:layout_below="@id/intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/basic_rules"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/lifeline"
+        android:layout_below="@id/rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/lifeline_talk"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/highscore_rules"
+        android:layout_below="@id/lifeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/highscore_rules"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:textStyle="bold"
