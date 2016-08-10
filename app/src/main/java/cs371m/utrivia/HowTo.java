@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 /**
  * Created by julioMendez on 8/9/16.
  */
-public class HowTo extends AppCompatActivity {
+public class HowTo extends BaseMenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

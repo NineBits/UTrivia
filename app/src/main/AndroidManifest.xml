@@ -29,6 +29,7 @@
         <activity
             android:name=".Questionnaire"
             android:screenOrientation="portrait">
+
         </activity>
 
         <activity

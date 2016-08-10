@@ -28,7 +28,7 @@ import cs371m.utrivia.Questionnaire;
  * Top Highscores Activity displays top 5 highscores.
  */
 
-public class TopHighscores extends Activity {
+public class TopHighscores extends BaseMenuActivity {
     private static final String HIGHSCORES_FILE= "highscore_file";
 
     // for all the sounds we play

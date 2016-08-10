@@ -60,7 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Questionnaire extends AppCompatActivity {
+public class Questionnaire extends BaseMenuActivity {
     private static final String TAG = "Questionnaire Activity";
     ImageView progressbar;
     TextView qText, qNumber, score_display;

@@ -1,5 +1,6 @@
 package cs371m.utrivia;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -10,12 +11,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class HomePage extends AppCompatActivity {
-
+public class HomePage extends BaseMenuActivity {
+    String TAG = "HOME";
     // for all the sounds we play
     private SoundPool mSounds;
     private int nextSound;
@@ -27,38 +30,6 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home_page, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //mute audio
-            //might be temp solution since this method is deprecated.
-            /*
-            AudioManager amanager=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
-            amanager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
-            amanager.setStreamMute(AudioManager.STREAM_ALARM, true);
-            amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
-            amanager.setStreamMute(AudioManager.STREAM_RING, true);
-            amanager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
-            */
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void toHighscores(View view) {
@@ -87,8 +58,5 @@ public class HomePage extends AppCompatActivity {
         // Context, id of resource, priority (currently no effect)
     }
 
-    public void toAbout(MenuItem item) {
-        Intent intent = new Intent(this, HowTo.class);
-        startActivity(intent);
-    }
+
 }

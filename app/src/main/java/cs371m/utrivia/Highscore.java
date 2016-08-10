@@ -24,7 +24,7 @@ import cs371m.utrivia.Questionnaire;
 /**
  * Created by julioMendez on 7/19/16.
  */
-public class Highscore extends Activity {
+public class Highscore extends BaseMenuActivity {
     boolean newHighscoreFlag = false;
     DatabaseHelper myDbHelper;
     HighscoreList newHighscore;
