@@ -13,6 +13,9 @@ import android.widget.Toast;
  */
 public class BaseMenuActivity extends AppCompatActivity {
 
+    public enum SoundStatus {on,off}
+    private SoundStatus status;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -56,9 +59,14 @@ public class BaseMenuActivity extends AppCompatActivity {
     }
 
     public void setSound(int status) {
-        //Log.d(TAG,""+status);
+        if (status < 0 || status >= SoundStatus.values().length) {
 
-        Toast.makeText(getApplicationContext(),"HELLO: " + status,
+            status = 0; // if out of bounds set to 0
+        }
+        //Log.d(TAG,""+status);
+        SoundStatus newSound = SoundStatus.values()[status];
+        //this.status = status;
+        Toast.makeText(getApplicationContext(),"Sound: " + newSound,
                 Toast.LENGTH_SHORT).show();
 
     }
