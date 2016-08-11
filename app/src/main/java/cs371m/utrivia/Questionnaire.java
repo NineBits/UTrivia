@@ -72,6 +72,8 @@ public class Questionnaire extends BaseMenuActivity {
     int numQuestions = 0;
     int score = 0;
     boolean lifeline_used;
+    boolean bonus_used;
+    ArrayList<MultiQuestion> bonus_list;
 
     // for all the sounds we play
     private SoundPool mSounds;
@@ -112,6 +114,8 @@ public class Questionnaire extends BaseMenuActivity {
 
        // DatabaseConnector database = new DatabaseConnector(this);
         final  ArrayList<MultiQuestion> question_list = myDbHelper.getAllQuestions(); //database.getAllQuestions();
+        bonus_used = false;
+        bonus_list = myDbHelper.getBonusQuestions();
         current_question = question_list.get(numQuestions);
         qText = (TextView) findViewById(R.id.question_text);
         qNumber = (TextView) findViewById(R.id.question_number);
@@ -132,16 +136,29 @@ public class Questionnaire extends BaseMenuActivity {
                 RadioButton answer = (RadioButton) Questionnaire.this.findViewById(rGroup.getCheckedRadioButtonId());
                 Log.d("yourans", current_question.getCorrect_answer()+" "+answer.getText());
                 if(answer.getText().toString().equals(current_question.getCorrect_answer())) {
-                    if(lifeline_used) {
-                        score += 2;
+                    if(!bonus_used) {
+                        if (lifeline_used) {
+                            score += 2;
+                        } else {
+                            score += 5;
+                        }
                     } else {
-                        score += 5;
-                    }
+                            score = score *2;
+                        }
+
+                } else if (!(answer.getText().toString().equals(current_question.getCorrect_answer())) && bonus_used) {
+                    score = score/2;
                 }
 
                 //action for onclick
                 if(numQuestions >= 15) {
-                    toHighscore(v);
+                    if(bonus_used) {
+                        toHighscore(v);
+                    } else {
+                        DialogFragment newFragment = BonusDialogFragment.newInstance();
+                        newFragment.show(getFragmentManager(), "Answer Bonus Question?");
+                    }
+
                 }
 
                 if(numQuestions < 15) {
@@ -182,7 +199,6 @@ public class Questionnaire extends BaseMenuActivity {
 
     public void toHighscore(View view) {
         Intent intent = new Intent(this, Highscore.class);
-
 
         SharedPreferences.Editor sharedScore = getSharedPreferences(TOTALSCORE, MODE_PRIVATE).edit();
         sharedScore.putInt("score", score);
@@ -225,6 +241,23 @@ public class Questionnaire extends BaseMenuActivity {
         lifeline_button.setEnabled(false);
     }
 
+    public void setBonus() {
+        bonus_used = true;
+        current_question = bonus_list.get(0);
+        qText.setText(current_question.getQuestion_text());
+        qNumber.setText((+numQuestions+1)+".");
+        score_display.setText("SCORE: " + score);
+        option_A.setText(current_question.getcA());
+        option_B.setText(current_question.getcB());
+        option_C.setText(current_question.getcC());
+        option_D.setText(current_question.getcD());
+
+        //Need to add score logic to lifeline
+        //ifeline_used = true;
+        lifeline_button.setEnabled(false);
+        numQuestions++;
+    }
+
     private void nextQuestionActions(String message, int soundId) {
         //mInfoTextView.setText(messageId);
         if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
@@ -237,11 +270,6 @@ public class Questionnaire extends BaseMenuActivity {
         super.onResume();
         //Log.d(TAG, "in onResume");
         mSounds = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-
-        // 2 = maximum sounds to play at the same time,
-        // AudioManager.STREAM_MUSIC is the stream type typically used for games
-        // 0 is the "the sample-rate converter quality. Currently has no effect. Use 0 for the default."
-
         nextSound = mSounds.load(this, R.raw.button_sound, 1);
         // Context, id of resource, priority (currently no effect)
 

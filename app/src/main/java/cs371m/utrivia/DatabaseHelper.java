@@ -203,6 +203,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return question_list;
     }
 
+    public ArrayList<MultiQuestion> getBonusQuestions() {
+        ArrayList<MultiQuestion> question_list = new ArrayList<MultiQuestion>();
+        String selectQuery = "SELECT  * FROM " + "BONUS_QUESTION";
+        //database =this.getReadableDatabase();
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                ArrayList<String> choice_list = new ArrayList<String>();
+                choice_list.add(cursor.getString(3));
+                choice_list.add(cursor.getString(4));
+                choice_list.add(cursor.getString(5));
+                choice_list.add(cursor.getString(6));
+
+                MultiQuestion question = new MultiQuestion(cursor.getString(1),cursor.getString(2),choice_list);
+
+                question.setId(cursor.getInt(0));
+                //question.setQuestion_text(cursor.getString(1));
+                //question.setCorrect_answer(cursor.getString(2));
+                //question.setcA(cursor.getString(3));
+                //question.setcB(cursor.getString(4));
+                //question.setcC(cursor.getString(5));
+                //question.setcD(cursor.getString(6));
+                question_list.add(question);
+            } while (cursor.moveToNext());
+            Collections.shuffle(question_list);
+        }
+
+
+        return question_list;
+    }
+
     public ArrayList<HighscoreList> getAllHighscores() {
         ArrayList<HighscoreList> highscore_list = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + "HIGHSCORES";

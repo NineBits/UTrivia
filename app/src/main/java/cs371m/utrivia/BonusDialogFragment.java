@@ -5,25 +5,31 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-public class LifelineDialogFragment extends DialogFragment {
-    static LifelineDialogFragment newInstance() {
-        return new LifelineDialogFragment();
+
+/**
+ * Created by kellypc on 8/10/2016.
+ */
+public class BonusDialogFragment extends DialogFragment {
+    static BonusDialogFragment newInstance() {
+        return new BonusDialogFragment();
     }
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Using the lifeline will reduce the reward of the question to 2 points instead of 5. Confirm use?")
+        builder.setMessage("Would you like to answer the Bonus Question?")
                 .setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 ((Questionnaire)getActivity()).setBonus();
+                                //((Questionnaire)getActivity()).bonus_used = true;
                                 dismiss();
                             }
                         })
                 .setNegativeButton("no",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                ((Questionnaire)getActivity()).bonus_used = true;
                                 dismiss();
                             }
                         });
