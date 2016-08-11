@@ -15,12 +15,12 @@ public class SoundDialogFragment extends DialogFragment {
      * Create a new instance of Difficulty, initialized to
      * show the current difficulty
      */
-    public static SoundDialogFragment newInstance(int difficulty) {
+    public static SoundDialogFragment newInstance(int sound) {
         SoundDialogFragment result = new SoundDialogFragment();
 
         // Supply difficulty input as an argument.
         Bundle args = new Bundle();
-        args.putInt(SOUND_KEY , difficulty);
+        args.putInt(SOUND_KEY , sound);
         result.setArguments(args);
 
         return result;
@@ -53,7 +53,7 @@ public class SoundDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // user pressed okay, so we are going to change the difficulty
                         int soundStatus = getArguments().getInt(SOUND_KEY, 0);
-                        ((BaseMenuActivity)getActivity()).setSound(soundStatus);
+                        ((BaseMenuActivity)getActivity()).setSoundStatus(soundStatus);
 
                        // ((AndroidTicTacToe)getActivity()).setDifficulty(newDifficulty);
                         dismiss();

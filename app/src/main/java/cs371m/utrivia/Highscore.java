@@ -28,10 +28,12 @@ public class Highscore extends BaseMenuActivity {
     boolean newHighscoreFlag = false;
     DatabaseHelper myDbHelper;
     HighscoreList newHighscore;
+    gameSounds gSound;
 
     // for all the sounds we play
     private SoundPool mSounds;
     private int nextSound;
+    private String TAG = "Highscore Acivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,10 +42,9 @@ public class Highscore extends BaseMenuActivity {
 
         SharedPreferences totalscore = getSharedPreferences(Questionnaire.TOTALSCORE, MODE_PRIVATE);
         int restoredscore = totalscore.getInt("score", 0);
-
         newHighscore = new HighscoreList();
         newHighscore.setScore(restoredscore);
-
+        setInstanceVarsFromSharedPrefs();
         myDbHelper = new DatabaseHelper(this);
 
 
@@ -77,7 +78,10 @@ public class Highscore extends BaseMenuActivity {
             myDbHelper.addHS(newHighscore);
         }
         Intent intent = new Intent(this, TopHighscores.class);
-        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        saveSoundState();
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        }
         startActivity(intent);
     }
 
@@ -124,8 +128,6 @@ public class Highscore extends BaseMenuActivity {
 
         nextSound = mSounds.load(this, R.raw.button_sound, 1);
         // Context, id of resource, priority (currently no effect)
-
-
     }
 
 }

@@ -3,6 +3,7 @@ package cs371m.utrivia;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.media.AudioManager;
@@ -41,7 +42,7 @@ public class TopHighscores extends BaseMenuActivity {
         setContentView(R.layout.top_highscores_layout);
 
         // fillHighscoreWithStatic();
-
+        setInstanceVarsFromSharedPrefs();
         DatabaseHelper myDbHelper = new DatabaseHelper(this);
 
         try {
@@ -95,7 +96,10 @@ public class TopHighscores extends BaseMenuActivity {
 //    }
 
     public void toHome(View view) {
-        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        }
+        saveSoundState();
         Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }

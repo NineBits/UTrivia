@@ -78,12 +78,13 @@ public class Questionnaire extends BaseMenuActivity {
     private int nextSound;
 
     public static final String TOTALSCORE = "TotalScore";
+    public static final String SOUND = "Sound";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        setInstanceVarsFromSharedPrefs();
         DatabaseHelper myDbHelper = new DatabaseHelper(null);
         myDbHelper = new DatabaseHelper(this);
 
@@ -186,15 +187,20 @@ public class Questionnaire extends BaseMenuActivity {
         SharedPreferences.Editor sharedScore = getSharedPreferences(TOTALSCORE, MODE_PRIVATE).edit();
         sharedScore.putInt("score", score);
         sharedScore.apply();
-        //setting preferences
-        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        saveSoundState();
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        }
+
         startActivity(intent);
         startActivity(intent);
     }
 
 
     public void onClickLifeline(View view) {
-        mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(nextSound, 1, 1, 1, 0, 1);
+        }
         DialogFragment newFragment = LifelineDialogFragment.newInstance();
         newFragment.show(getFragmentManager(), "Use lifeline?");
 
@@ -221,7 +227,9 @@ public class Questionnaire extends BaseMenuActivity {
 
     private void nextQuestionActions(String message, int soundId) {
         //mInfoTextView.setText(messageId);
-        mSounds.play(soundId, 1, 1, 1, 0, 1);
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(soundId, 1, 1, 1, 0, 1);
+        }
     }
 
     @Override

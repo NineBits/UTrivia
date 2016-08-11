@@ -3,6 +3,7 @@ package cs371m.utrivia;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -25,21 +26,29 @@ public class HomePage extends BaseMenuActivity {
     private int newgameSound;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setInstanceVarsFromSharedPrefs();
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setInstanceVarsFromSharedPrefs();
         setSupportActionBar(toolbar);
     }
 
     public void toHighscores(View view) {
-        mSounds.play(newgameSound, 1, 1, 1, 0, 1);
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(newgameSound, 1, 1, 1, 0, 1);
+        }
+        saveSoundState();
         Intent intent = new Intent(this, TopHighscores.class);
         startActivity(intent);
     }
 
     public void startGame(View view) {
-        mSounds.play(newgameSound, 1, 1, 1, 0, 1);
+        if(gs.getSoundStatus().equals(gameSounds.SoundStatus.on)) {
+            mSounds.play(newgameSound, 1, 1, 1, 0, 1);
+        }
+        saveSoundState();
         Intent intent = new Intent(this, Questionnaire.class);
         startActivity(intent);
     }
